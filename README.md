@@ -1,4 +1,4 @@
-# OptiMask
+# SafeWallet
 
 OptiMask is a MetaMask-like environment that allows users to interact with the Ethereum blockchain seamlessly. With OptiMask, users can generate a mnemonic seed phrase, create multiple wallets, check their wallet balances, and even send transactions to other addresses.
 
