@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import TransactionForm from './TransactionForm'
 
-const WalletBox = ({ wallets, selectedWalletIndex, handleChange, walletBalance, selectedWallet, isTransactionForm, setIsTransactionForm }) => {
+const WalletBox = ({ limit, wallets, selectedWalletIndex, handleChange, walletBalance, selectedWallet, isTransactionForm, setIsTransactionForm }) => {
     const handleTransaction = () => {
         setIsTransactionForm(true)
     }
@@ -46,7 +46,7 @@ const WalletBox = ({ wallets, selectedWalletIndex, handleChange, walletBalance, 
                 ) : ''}
 
                 <div className={`${isTransactionForm ? 'block' : 'hidden'}`}>
-                    <TransactionForm selectedWallet={selectedWallet} walletBalance={walletBalance} />
+                    <TransactionForm limit={limit} selectedWallet={selectedWallet} walletBalance={walletBalance} />
                 </div>
 
             </div>

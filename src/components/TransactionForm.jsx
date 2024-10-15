@@ -4,7 +4,7 @@ import { Toaster, toast } from 'sonner'
 import './TransactionForm.css'
 
 // eslint-disable-next-line react/prop-types
-const TransactionForm = ({ selectedWallet, walletBalance }) => {
+const TransactionForm = ({limit, selectedWallet, walletBalance }) => {
     const [recipient, setRecipient] = useState('');
     const [amount, setAmount] = useState('');
     const [error, setError] = useState('');
@@ -12,14 +12,19 @@ const TransactionForm = ({ selectedWallet, walletBalance }) => {
 
     const sendTransaction = async (recipient, amount) => {
         if (selectedWallet && walletBalance > 0 && amount && recipient) {
-            setIsSending(true)
-            const provider = new ethers.JsonRpcProvider(import.meta.env.VITE_ALCHEMY_RPC_URL);
-            // eslint-disable-next-line react/prop-types
-            const wallet = new ethers.Wallet(selectedWallet.privateKey, provider);
+            if (amount > limit) {
+                console.log('Amount cannot be more than the limit set for this wallet')
+            }
+            else{
 
-            const transaction = {
-                to: recipient,
-                value: ethers.parseUnits(amount, 'ether'),
+                setIsSending(true)
+                const provider = new ethers.JsonRpcProvider(import.meta.env.VITE_ALCHEMY_RPC_URL);
+                // eslint-disable-next-line react/prop-types
+                const wallet = new ethers.Wallet(selectedWallet.privateKey, provider);
+                
+                const transaction = {
+                    to: recipient,
+                    value: ethers.parseUnits(amount, 'ether'),
             };
 
 
@@ -32,6 +37,7 @@ const TransactionForm = ({ selectedWallet, walletBalance }) => {
             } catch (error) {
                 console.error('Transaction failed:', error);
             }
+         }
         }
         else {
             if (recipient == '' || amount == '') {
